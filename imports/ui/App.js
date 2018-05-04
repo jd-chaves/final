@@ -4,7 +4,7 @@ import { Meteor } from "meteor/meteor";
 import Game from "./Game.js";
 import Visual from "./Visual.js";
 
-class App extends Component {
+export default class App extends Component {
 
 constructor(props)
 {
@@ -17,10 +17,6 @@ constructor(props)
 	}
 }
 
-componentDidMount() {
-  handleClickOnLink(this.this.state.article_name);
-  console.log(this.state);
-}
 
 handleClickOnLink(nombre)
 {

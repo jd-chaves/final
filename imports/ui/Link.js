@@ -3,7 +3,7 @@ import { Meteor } from "meteor/meteor";
 
 
 
-export default class Game extends Component {
+export default class Link extends Component {
 	constructor(props)
 	{
 		this.state={
