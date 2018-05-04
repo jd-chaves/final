@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import { withTracker } from "meteor/react-meteor-data";
 
 import Game from "./Game.js";
 import Visual from "./Visual.js";
@@ -19,6 +17,10 @@ constructor(props)
 	}
 }
 
+componentDidMount() {
+  handleClickOnLink(this.this.state.article_name);
+  console.log(this.state);
+}
 
 handleClickOnLink(nombre)
 {
@@ -29,21 +31,27 @@ handleClickOnLink(nombre)
 
 	var temp = nombre.replace(/ /g, "_");
 
-	var links_new = fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${temp}&prop=links&pllimit=500&format=json`)
+	const links_new_json = fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${temp}&prop=links&pllimit=500&format=json`)
 						.then((data)=>data.json())
 						.then(json => console.log(json));
 
+	var links_new = links_new_json.query.pages.links.map((l)=>l.title)
+
+
 	this.setState({article_name: nombre,
 					nodes: nodes_new,
-					arcs: arcs_new	
+					arcs: arcs_new,
+					links: links_new
 					});
 }
 
 	render() {
 		let user = this.props.currentUser;
 		return (
+			<div>
 			<Game links = {this.state.links} handleClickOnLink = {this.handleClickOnLink}/>
 			<Visual nodes={this.state.nodes} arcs={this.state.arcs}/>
+			</div>
 			);
 	}
 }
