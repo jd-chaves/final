@@ -18,7 +18,7 @@ export default class Link extends Component {
 
 	render() {
 		return (
-			<button onClick={this.handleClick}>this.state.article_name</button>
+			<button onClick={this.handleClick}>{this.state.article_name}</button>
 		);
 	}
 }

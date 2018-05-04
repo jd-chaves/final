@@ -29,16 +29,17 @@ handleClickOnLink(nombre)
 
 	const links_new_json = fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${temp}&prop=links&pllimit=500&format=json`)
 						.then((data)=>data.json())
-						.then(json => console.log(json));
+						.then(json => {
+							console.log(json);
+			var links_new = json.query.pages.links.map((l)=>l.title)
 
-	var links_new = links_new_json.query.pages.links.map((l)=>l.title)
+			this.setState({article_name: nombre,
+							nodes: nodes_new,
+							arcs: arcs_new,
+							links: links_new
+							});
+						});
 
-
-	this.setState({article_name: nombre,
-					nodes: nodes_new,
-					arcs: arcs_new,
-					links: links_new
-					});
 }
 
 	render() {

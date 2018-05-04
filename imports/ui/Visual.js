@@ -10,7 +10,7 @@ export default class Visual extends Component {
 
 	componentDidMount(){
 
-		var nodes = this.this.props.nodes;
+		var nodes = this.props.nodes;
 		var arcs = this.props.arcs;
 
 		const width = 800;
